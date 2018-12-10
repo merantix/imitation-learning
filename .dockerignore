@@ -1,0 +1,5 @@
+#  These directories are excluded from docker ADD/COPY commands
+.git
+.idea
+data
+imitation/test/mock_data_*

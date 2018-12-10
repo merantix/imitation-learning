@@ -1,0 +1,19 @@
+model_type: conditional_il_model
+
+output_dir: /data/imitation_learning/experiments/local_test
+train_path: /data/imitation_learning/preprocessed/TRAIN*.tfrecord.gz
+validation_path: /data/imitation_learning/preprocessed/VAL*.tfrecord.gz
+
+train_steps: 100
+train_batch_size: 6
+save_checkpoints_steps: 50
+eval_batch_size: 10
+
+# Hyperparameters
+learning_rate: 0.0002
+shuffle_buffer_size: 1000
+save_summary_steps: 100
+lambda_steer: 0.475
+lambda_gas: 0.4275
+lambda_brake: 0.0475
+lambda_speed: 0.05
