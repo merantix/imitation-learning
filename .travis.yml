@@ -10,7 +10,7 @@ before_install:
   - docker build --build-arg base_image=tensorflow/tensorflow:1.12.0 -t imit-learn .
 
 script:
-  - docker run --rm imit-learn pytest
+  - docker run --rm -v $TRAVIS_BUILD_DIR/imitation:/imitation -v $(pwd)/data:/data imit-learn pytest
 
 notifications:
     email: false
