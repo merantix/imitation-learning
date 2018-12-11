@@ -1,0 +1,16 @@
+language: python
+
+services:
+  - docker
+
+python:
+  - 2.7
+
+before_install:
+  - docker build --build-arg base_image=tensorflow/tensorflow:1.12.0 -t imit-learn .
+
+script:
+  - docker run --rm imit-learn pytest
+
+notifications:
+    email: false
