@@ -1,4 +1,4 @@
-# Imitation learning
+# Imitation learning [![Build Status](https://travis-ci.org/merantix/imitation-learning.svg?branch=master)](https://travis-ci.org/merantix/imitation-learning)
 
 
 This repository provides a Tensorflow implementation of the paper 
