@@ -1,0 +1,16 @@
+language: python
+
+services:
+  - docker
+
+python:
+  - 2.7
+
+before_install:
+  - docker build --build-arg base_image=tensorflow/tensorflow:1.12.0 -t imit-learn .
+
+script:
+  - docker run --rm -v "$TRAVIS_BUILD_DIR/imitation:/imitation" -v "$TRAVIS_BUILD_DIR/data:/data" imit-learn pytest
+
+notifications:
+    email: false
