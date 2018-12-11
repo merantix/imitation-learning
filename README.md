@@ -21,10 +21,6 @@ This repository uses docker images. In order to use it, install [docker](https:/
 To build the image, use:
 
 ```bash
-cd <root of this repository>
-DOCKER_BASH_HISTORY="$(pwd)/data/docker.bash_history"
-touch $DOCKER_BASH_HISTORY
-
 docker build --build-arg base_image=tensorflow/tensorflow:1.12.0-gpu -t imit-learn .
 ```
 
@@ -32,8 +28,16 @@ If you only need a CPU image, leave out `base_image=tensorflow/tensorflow:1.12.0
 So far, we only tested the setup with Python2, which `tensorflow:1.12.0` is based on.
 
 To run a container, use:
-```
-docker run -it --rm --name imit_learn -v $(pwd)/imitation:/imitation -v $(pwd)/data:/data -v "$DOCKER_BASH_HISTORY:/root/.bash_history" imit-learn bash
+
+```bash
+cd <root of this repository>
+DOCKER_BASH_HISTORY="$(pwd)/data/docker.bash_history"
+touch $DOCKER_BASH_HISTORY
+
+docker run -it --rm --name imit_learn \ 
+    -v $(pwd)/imitation:/imitation -v $(pwd)/data:/data \
+    -v "$DOCKER_BASH_HISTORY:/root/.bash_history" \
+    imit-learn bash
 ```
 
 Download [dataset](https://github.com/carla-simulator/imitation-learning/#user-content-dataset) (24GB).
