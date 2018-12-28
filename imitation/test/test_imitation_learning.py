@@ -99,12 +99,12 @@ def _convert_to_input_fn(img, current_speed, image_cut=(115, 510), desired_shape
         'Expected current_speed to be singleton array. Instead found {}'.format(current_speed)
 
     predict_input_fn = tf.estimator.inputs.numpy_input_fn(
-       x={
-           ilc.FEATKEY_IMG: np.expand_dims(image_normalized, axis=0),
-           ilc.TGT_SPEED: current_speed.astype(np.float32),
-       },
-       num_epochs=1,
-       shuffle=False)
+        x={
+            ilc.FEATKEY_IMG: np.expand_dims(image_normalized, axis=0),
+            ilc.TGT_SPEED: current_speed.astype(np.float32),
+        },
+        num_epochs=1,
+        shuffle=False)
 
     return predict_input_fn
 

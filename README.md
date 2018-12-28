@@ -34,8 +34,9 @@ cd <root of this repository>
 DOCKER_BASH_HISTORY="$(pwd)/data/docker.bash_history"
 touch $DOCKER_BASH_HISTORY
 
-docker run -it --rm --name imit_learn \ 
-    -v $(pwd)/imitation:/imitation -v $(pwd)/data:/data \
+docker run -it --rm --name imit_learn \
+    -v "$(pwd)/imitation:/imitation" \
+    -v "$(pwd)/data:/data" \
     -v "$DOCKER_BASH_HISTORY:/root/.bash_history" \
     imit-learn bash
 ```

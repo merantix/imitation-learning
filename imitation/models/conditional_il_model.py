@@ -33,7 +33,7 @@ def model(features, labels, mode, loss_weights):
             'Speed_Branch': shape: (?, )
     """
     image = features[ilc.FEATKEY_IMG]
-    batch_size = tf.shape(features[ilc.TGT_SPEED])[0]
+    batch_size = tf.shape(image)[0]
 
     # Note: this is reverse engineered to work with the imitation-learning network
     speed_pair = [None, tf.reshape(features[ilc.TGT_SPEED], shape=(batch_size, 1))]
