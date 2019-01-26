@@ -13,6 +13,9 @@ There are only a few changes to the setup in the paper:
 * We take different weight hyperparameters for the outputs (steer, gas, brake, speed), 
   since the hyperparameters suggested in the paper did not work for us.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/merantix/imitation-learning/master/img/short_5s_teaser.gif">
+</p>
 
 ### Setup
 
