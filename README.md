@@ -1,5 +1,4 @@
-# Imitation learning [![Build Status](https://travis-ci.org/merantix/imitation-learning.svg?branch=master)](https://travis-ci.org/merantix/imitation-learning)
-
+# Imitation learning [![Build Status](https://travis-ci.org/merantix/imitation-learning.svg?branch=master)](https://travis-ci.org/merantix/imitation-learning) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20this%20out:%20A%20Tensorflow%20implementation%20of%20the%20paper%20End-to-end%20Driving%20via%20Conditional%20Imitation%20Learning&url=https://github.com/merantix/imitation-learning&via=merantix&hashtags=tensorflow,imitation-learning,autonomous-driving,robocars,paper,docker,machine-learning,python)
 
 This repository provides a Tensorflow implementation of the paper 
 [End-to-end Driving via Conditional Imitation Learning](http://vladlen.info/papers/conditional-imitation.pdf).
