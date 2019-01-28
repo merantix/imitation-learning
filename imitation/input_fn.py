@@ -97,7 +97,7 @@ class CarlaPreprocessor(Preprocessor):
         Returns:
             a tf.data.Dataset
         """
-        dataset = dataset.map(self.read_fn)
+        dataset = dataset.map(self.read_fn, num_parallel_calls=16)
         return dataset
 
     @staticmethod
@@ -143,7 +143,7 @@ class ProbabilisticImageAugmentor(Preprocessor):
 
     def preprocess(self, dataset, mode):
         assert mode == tf.estimator.ModeKeys.TRAIN, 'Should not augment eval / inference'
-        return dataset.map(self.apply_to_image)
+        return dataset.map(self.apply_to_image, num_parallel_calls=16)
 
 
 def _rand_gauss_blur(img):
@@ -218,5 +218,6 @@ def evaluation_input_fn(tfrecord_fpaths, batch_size):
         mode=tf.estimator.ModeKeys.EVAL,
         num_epochs=1,
         model_preprocessors=[FilterValidIntention(), CarlaPreprocessor()],
+        num_parallel_calls=16,
     )
     return input_fn

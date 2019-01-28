@@ -12,7 +12,9 @@ def input_fn_factory(tfrecord_fpaths,
                      num_epochs=None,
                      shuffle=False,
                      model_preprocessors=None,
-                     shuffle_buffer_size=1000):
+                     shuffle_buffer_size=1000,
+                     num_parallel_reads=1,
+                     num_parallel_calls=1):
     """
     Args:
         tfrecord_fpaths: A list of tfrecord paths.
@@ -23,6 +25,11 @@ def input_fn_factory(tfrecord_fpaths,
         model_preprocessors: list of functions that take (features, labels) and return (features, labels)
         shuffle: should examples be randomized?
         shuffle_buffer_size: size of shuffle buffer. larger size improves pseudo-randomness, but increases startup time
+        num_parallel_reads: Scalar representing the number of files to read in parallel. Mostly useful when reading
+            from remote filesystems. Setting this to None will force tensorflow to process the files sequentially
+            (will not use the faster ParallelInterleaveDataset).
+        num_parallel_calls: Representing the number elements to process in parallel. Setting this to None will force
+            tensorflow to process elements sequentially (will not use the faster ParallelMapDataset).
 
     Returns:
         a (factory) function that itself returns batches of (features, labels).  The returned function should be called
@@ -38,9 +45,15 @@ def input_fn_factory(tfrecord_fpaths,
         dataset = tf.data.Dataset.from_tensor_slices(tfrecord_fpaths)
         if shuffle:
             dataset = dataset.shuffle(len(tfrecord_fpaths))
-        dataset = dataset.flat_map(lambda filename: tf.data.TFRecordDataset(filename, compression_type="GZIP"))
+        dataset = dataset.flat_map(lambda filename: tf.data.TFRecordDataset(filename,
+                                                                            compression_type="GZIP",
+                                                                            num_parallel_reads=num_parallel_reads,
+                                                                            ),
+                                   )
         # deserialize tfexamples
-        dataset = dataset.map(lambda serialized: tf.parse_single_example(serialized, feature_schema))
+        dataset = dataset.map(lambda serialized: tf.parse_single_example(serialized, feature_schema),
+                              num_parallel_calls=num_parallel_calls,
+                              )
 
         for preprocessor in model_preprocessors or []:
             dataset = preprocessor.preprocess(dataset, mode)
