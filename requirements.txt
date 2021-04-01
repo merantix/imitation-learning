@@ -4,7 +4,7 @@ future==0.16.0
 ipdb==0.11
 numpy==1.14.5
 scipy==1.1.0
-Pillow==5.2.0
+Pillow==8.1.1
 flake8==3.5.0
 pytest==3.7.1
 h5py==2.8.0
