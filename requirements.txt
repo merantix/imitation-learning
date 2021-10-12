@@ -8,4 +8,4 @@ Pillow==5.2.0
 flake8==3.5.0
 pytest==3.7.1
 h5py==2.8.0
-opencv-python==3.4.2.17
+opencv-python==3.4.7.28
